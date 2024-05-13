@@ -2,21 +2,21 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_flutter/model/weather_data.dart';
-import 'package:weather_app_flutter/resources/app_color.dart';
 import 'package:weather_app_flutter/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomescreenController extends GetxController {
   @override
   void onInit() async {
-    await getUserLocation();
-    prefs = await SharedPreferences.getInstance();
+    await getUserLocation(); //Getting the Current location of user
+    prefs =
+        await SharedPreferences.getInstance(); //initializing shared preference
     isLocationBlank.value = prefs.getBool("isLocationBlank") ?? true;
     super.onInit();
   }
 
-  RxBool isLocationBlank = true.obs;
-  RxBool isError = false.obs;
+  RxBool isLocationBlank = true.obs; //Checks if the search field is empty
+  RxBool isError = false.obs; //For checking the errors
   RxDouble lat = 0.0.obs; //Latitude_value
   RxDouble lon = 0.0.obs; //Longitude_value
   RxBool isLoaded = false.obs; //Initially the value isn't loaded
@@ -28,10 +28,12 @@ class HomescreenController extends GetxController {
   RxString searchText = "".obs;
   late SharedPreferences prefs;
 
+  //Seaching in text field
   void onSearchTextChanged(String value) {
     searchText.value = value;
   }
 
+  //When tap on upadte button
   void search() async {
     isLocationBlank.value = false;
     isLoaded.value = false;
@@ -44,6 +46,7 @@ class HomescreenController extends GetxController {
     }
   }
 
+  //Saving user input location using Shared Preferences
   void saveLocation(String location) {
     prefs.setString("location", location);
     prefs.setBool("isLocationBlank", false);
@@ -115,14 +118,6 @@ class HomescreenController extends GetxController {
     } catch (e) {
       print('Error fetching weather data: $e');
       isError.value = true;
-      Get.snackbar(
-        'Error',
-        'Failed to fetch weather data. Please try again later.',
-        backgroundColor: errorColor,
-        colorText: whiteColor,
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.TOP,
-      );
       return null;
     }
   }
