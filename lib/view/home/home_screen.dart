@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +7,7 @@ import 'package:weather_app_flutter/model/weather_data.dart';
 import 'package:weather_app_flutter/resources/app_color.dart';
 import 'package:weather_app_flutter/resources/app_images.dart';
 import 'package:weather_app_flutter/view/home/controller/home_screen_controller.dart';
+import 'package:weather_app_flutter/view/splash/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         : controller.getWeatherUsingLocation();
     var date = DateFormat("yMMMMd").format(DateTime.now());
     var theme = Theme.of(context);
+
     return Obx(() => Scaffold(
           backgroundColor: whiteColor,
           appBar: AppBar(
@@ -54,6 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     fontSize: 18.0.sp,
                     fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16.0.w),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const SplashScreen());
+                },
+                child: Text(
+                  "Help",
+                  style: TextStyle(
+                    fontSize: 18.0.sp,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),

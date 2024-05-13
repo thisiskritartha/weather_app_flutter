@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:weather_app_flutter/resources/app_color.dart';
+import 'package:weather_app_flutter/resources/app_images.dart';
+import 'package:weather_app_flutter/resources/app_string.dart';
 import 'package:weather_app_flutter/view/home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,14 +29,15 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/bg_img.png'),
+            image: AssetImage(bgImage),
             fit: BoxFit.fill,
           ),
         ),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(height: 160.0.h),
               Text(
                 "We show weather for you.",
                 style: TextStyle(
@@ -44,14 +47,37 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontStyle: FontStyle.italic,
                 ),
               ),
-              SizedBox(height: 150.0.h),
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 36.0.w),
+                    child: Text(
+                      helperContent1,
+                      style: TextStyle(
+                        fontSize: 18.0.sp,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40.0.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 36.0.w),
+                    child: Text(
+                      helperContent2,
+                      style: TextStyle(
+                        fontSize: 18.0.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 60.0.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(const HomeScreen());
+                  Get.to(() => const HomeScreen());
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 80.0.w,
+                    horizontal: 40.0.w,
                     vertical: 10.0.h,
                   ),
                   decoration: BoxDecoration(
@@ -65,12 +91,12 @@ class _SplashScreenState extends State<SplashScreen> {
                         "Skip",
                         style: TextStyle(
                           color: whiteColor,
-                          fontSize: 20.0.sp,
+                          fontSize: 24.0.sp,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 1.6.sp,
                         ),
                       ),
-                      SizedBox(width: 20.0.w),
+                      SizedBox(width: 10.0.w),
                       Icon(
                         Icons.arrow_forward,
                         size: 30.0.r,
@@ -78,7 +104,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
+              SizedBox(height: 80.0.h),
             ],
           ),
         ),

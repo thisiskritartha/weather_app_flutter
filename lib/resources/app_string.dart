@@ -1,0 +1,3 @@
+const String helperContent1 = "1) The app automatically fetches weather data for your current location if GPS location is enabled on your device. You can enable GPS location in your device settings.";
+
+const String helperContent2 = "2) To search for weather information for a specific location, tap on the search bar at the top of the screen, enter the desired location name, and tap the search button. The app will display the current weather conditions for the specified location.";
