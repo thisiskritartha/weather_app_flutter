@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:weather_app_flutter/app.dart';
 
-void main() {
+void main() async{
   initializeStartupDependenciesAndRun();
 }
 
