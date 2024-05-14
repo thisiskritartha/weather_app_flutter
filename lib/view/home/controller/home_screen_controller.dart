@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_flutter/model/weather_data.dart';
+import 'package:weather_app_flutter/resources/app_color.dart';
 import 'package:weather_app_flutter/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,7 @@ class HomescreenController extends GetxController {
     prefs =
         await SharedPreferences.getInstance(); //initializing shared preference
     isLocationBlank.value = prefs.getBool("isLocationBlank") ?? true;
-    isUpdateButton .value = prefs.getBool("isLocationBlank") ?? false;
+    isUpdateButton.value = prefs.getBool("isLocationBlank") ?? false;
     super.onInit();
   }
 
@@ -89,16 +90,29 @@ class HomescreenController extends GetxController {
 
 //Getting the current weather using user's latitude and longiture value
   Future<dynamic>? getWeatherUsingLatLon() async {
-    final WeatherData result =
-        await getCurrentWeatherUsingLatLon(lat.value, lon.value);
+    try {
+      final WeatherData result =
+          await getCurrentWeatherUsingLatLon(lat.value, lon.value);
 
-    isLoaded.value = true;
+      isLoaded.value = true;
 
-    minTemp.value = result.main!.tempMin!;
-    maxTemp.value = result.main!.tempMax!;
-    feelsLike.value = result.main!.feelsLike!;
+      minTemp.value = result.main!.tempMin!;
+      maxTemp.value = result.main!.tempMax!;
+      feelsLike.value = result.main!.feelsLike!;
 
-    return result;
+      return result;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Error fetching weather data. Please input the valid location.',
+        backgroundColor: errorColor,
+        colorText: whiteColor,
+        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
+      );
+      isError.value = true;
+      return null;
+    }
   }
 
 //Getting the current weather using user's search location value
@@ -122,7 +136,14 @@ class HomescreenController extends GetxController {
 
       return result;
     } catch (e) {
-      print('Error fetching weather data: $e');
+      Get.snackbar(
+        'Error',
+        'Error fetching weather data. Please input the valid location.',
+        backgroundColor: errorColor,
+        colorText: whiteColor,
+        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
+      );
       isError.value = true;
       return null;
     }
