@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: controller.search,
                 child: Text(
-                  controller.isLocationBlank.value ? "Save" : "Update",
+                  controller.isUpdateButton.value ? "Save" : "Update",
                   style: TextStyle(
                     fontSize: 18.0.sp,
                     fontWeight: FontWeight.w500,
@@ -76,8 +76,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           body: controller.isError.value
-              ? const Center(
-                  child: Text("Please try again."),
+              ? SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/error.png",
+                        height: 100.0.h,
+                        width: 100.0.h,
+                      ),
+                      SizedBox(height: 10.0.h),
+                      Text(
+                        "Please try again.",
+                        style: TextStyle(
+                          fontSize: 22.0.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               : controller.isLoaded.value
                   ? SingleChildScrollView(

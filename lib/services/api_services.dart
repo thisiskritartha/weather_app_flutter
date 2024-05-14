@@ -37,7 +37,6 @@ getCurrentWeatherUsingLocation(String location) async {
       duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.TOP,
     );
-    print('Error fetching weather data: $e');
     return null;
   }
 }

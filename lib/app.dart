@@ -16,6 +16,8 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage("assets/error.png"), context);
+    precacheImage(const AssetImage("assets/bg_img.png"), context);
     EasyLoading.instance
       ..displayDuration = const Duration(milliseconds: 3000)
       ..indicatorType = EasyLoadingIndicatorType.wanderingCubes

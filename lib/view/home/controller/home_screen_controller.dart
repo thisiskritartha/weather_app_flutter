@@ -12,6 +12,7 @@ class HomescreenController extends GetxController {
     prefs =
         await SharedPreferences.getInstance(); //initializing shared preference
     isLocationBlank.value = prefs.getBool("isLocationBlank") ?? true;
+    isUpdateButton .value = prefs.getBool("isLocationBlank") ?? false;
     super.onInit();
   }
 
@@ -20,6 +21,7 @@ class HomescreenController extends GetxController {
   RxDouble lat = 0.0.obs; //Latitude_value
   RxDouble lon = 0.0.obs; //Longitude_value
   RxBool isLoaded = false.obs; //Initially the value isn't loaded
+  RxBool isUpdateButton = false.obs;
   Future<dynamic>? currentWeatherData;
   RxString searchLocation = ''.obs;
   RxDouble maxTemp = 0.0.obs;
@@ -31,17 +33,21 @@ class HomescreenController extends GetxController {
   //Seaching in text field
   void onSearchTextChanged(String value) {
     searchText.value = value;
+    isUpdateButton.value = true;
   }
 
   //When tap on upadte button
   void search() async {
-    isLocationBlank.value = false;
-    isLoaded.value = false;
-    isError.value = false;
-    searchLocation.value = searchText.value;
-    FocusScope.of(Get.context!).unfocus();
-    if (searchLocation.value != "") {
-      saveLocation(searchLocation.value.toLowerCase());
+    if (searchText != "") {
+      isLocationBlank.value = false;
+      isLoaded.value = false;
+      isError.value = false;
+      isUpdateButton.value = false;
+      searchLocation.value = searchText.value;
+      FocusScope.of(Get.context!).unfocus();
+      if (searchLocation.value != "") {
+        saveLocation(searchLocation.value.toLowerCase());
+      }
       await getWeatherUsingLocation();
     }
   }
