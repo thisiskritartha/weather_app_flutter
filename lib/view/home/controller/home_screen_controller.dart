@@ -9,7 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomescreenController extends GetxController {
   @override
   void onInit() async {
-    await getUserLocation(); //Getting the Current location of user
+    if (isLocationBlank.value) {
+      await getUserLocation(); //Getting the Current location of user
+    }
     prefs =
         await SharedPreferences.getInstance(); //initializing shared preference
     isLocationBlank.value = prefs.getBool("isLocationBlank") ?? true;
@@ -39,7 +41,7 @@ class HomescreenController extends GetxController {
 
   //When tap on upadte button
   void search() async {
-    if (searchText != "") {
+    if (searchText != "" || searchLocation.value != "") {
       isLocationBlank.value = false;
       isLoaded.value = false;
       isError.value = false;
