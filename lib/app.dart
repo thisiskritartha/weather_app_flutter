@@ -39,6 +39,7 @@ class _AppState extends State<App> {
           builder: (_, child) {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
+              title: "Weather Checker",
               getPages: AppPages.appRoutes,
               initialRoute: initial,
               theme: customAppTheme(),
