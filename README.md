@@ -14,13 +14,13 @@ Weather App is a simple Flutter application that allows users to check the curre
 ## Installation
 To run this application locally, you need to have Flutter installed on your machine. If you haven't already installed Flutter, you can follow the instructions on the official Flutter website.
 1) Clone this repository:
-git clone https://github.com/thisiskritartha/weather_app_flutter.git
+``` git clone https://github.com/thisiskritartha/weather_app_flutter.git ```
 2) Navigate to the project directory:
-cd weather_app_flutter
+``` cd weather_app_flutter ```
 3) Install dependencies:
-flutter pub get
+``` flutter pub get ```
 4) Run the app:
-flutter run
+``` flutter run ```
 
 ### Or you can directly install the apk from the given link:
 https://drive.google.com/drive/folders/1wfSI8LdPhSR9ZkdqvgFGosvg4bVcyvSZ?usp=sharing
